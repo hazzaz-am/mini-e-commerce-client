@@ -1,69 +1,68 @@
-# React + TypeScript + Vite
+# Mini E-Commerce React App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive mini e-commerce web application built with React, TypeScript, Vite, and Tailwind CSS. Features include product listing, product detail pages, a cart sidebar with quantity controls, and a checkout modal.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Deployed Demo
 
-## Expanding the ESLint configuration
+- **Vercel Demo:** [Live](https://mini-e-commerce-client.vercel.app)
+- **Run Locally:** See instructions below
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📝 Features
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- Responsive product grid and detail pages
+- Add to cart, cart sidebar with quantity controls
+- Checkout modal with form validation
+- Modern UI with Tailwind CSS
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ Tech Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **React** (with Hooks)
+- **TypeScript** (for type safety)
+- **Tailwind CSS** (utility-first styling)
+- **React Router** (for navigation)
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## 💻 How to Run Locally
+
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/hazzaz-am/mini-e-commerce-client
+   cd mini-e-commerce-client
+   ```
+2. **Install dependencies:**
+   ```sh
+   pnpm install
+   # or
+   npm install
+   # or
+   yarn install
+   ```
+3. **Start the development server:**
+   ```sh
+   pnpm dev
+   # or
+   npm run dev
+   # or
+   yarn dev
+   ```
+4. **Open your browser:**
+   Visit [http://localhost:5173](http://localhost:5173) to view the app.
+
+---
+
+## 📦 Project Structure
+
+- `src/pages/` — Main pages (Home, Product Details)
+- `src/components/` — UI and module components (Navbar, CartSidebar, Button etc.)
+- `src/reducers/` — Reducers for state management
+- `src/providers/` — Context providers for state management
+- `src/routes/` — Application routes
+- `src/hooks/` — Custom hooks for logic reuse
+- `src/types/` — TypeScript types
