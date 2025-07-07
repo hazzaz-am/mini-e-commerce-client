@@ -5,16 +5,17 @@ export type TProduct = {
 	image: string;
 	description: string;
 	category: string;
+	brand: string;
 	rating: {
 		rate: number;
 		count: number;
 	};
-	inStock: boolean; 
-}
+	stock: number;
+};
 
 export type TProductCard = Omit<
 	TProduct,
-	"description" | "category" | "rating" | "inStock"
+	"description" | "category" | "rating" | "stock" | "brand"
 >;
 
 export type TCartItem = {
@@ -23,7 +24,6 @@ export type TCartItem = {
 	price: number;
 	quantity: number;
 };
-
 
 export type TCheckoutForm = {
 	name: string;
