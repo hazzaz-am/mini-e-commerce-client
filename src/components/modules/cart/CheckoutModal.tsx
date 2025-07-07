@@ -1,10 +1,10 @@
-import type { TCheckoutForm } from "../../../types";
+import type { TCartItem, TCheckoutForm } from "../../../types";
 import CheckoutForm from "./CheckoutForm";
 
 type CheckoutModalProps = {
 	open: boolean;
 	onClose: () => void;
-	onSubmit: (data: TCheckoutForm) => void;
+	onSubmit: (data: TCheckoutForm, cartItems: TCartItem[]) => void;
 };
 
 export default function CheckoutModal({

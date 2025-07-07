@@ -1,30 +1,18 @@
 import { useState } from "react";
 import { IoIosCart } from "react-icons/io";
 import { Link } from "react-router";
-
+import useCart from "../../hooks/useCart";
 import CartSidebar from "../modules/cart/CartSidebar";
-
-// Dummy cart data for demonstration
-const initialCart = [
-	{ id: 1, name: "Product 1", price: 20, quantity: 2 },
-	{ id: 2, name: "Product 2", price: 15, quantity: 1 },
-];
 
 export default function Navbar() {
 	const [cartOpen, setCartOpen] = useState(false);
-	const [cart, setCart] = useState(initialCart);
+	const cartState = useCart();
+	const state = cartState?.state;
 
-	const handleQuantity = (id: number, delta: number) => {
-		setCart((prev) =>
-			prev.map((item) =>
-				item.id === id
-					? { ...item, quantity: Math.max(1, item.quantity + delta) }
-					: item
-			)
-		);
-	};
-
-	const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+	const total = state?.cart.reduce(
+		(sum, item) => sum + item.price * item.quantity,
+		0
+	);
 
 	return (
 		<>
@@ -50,21 +38,18 @@ export default function Navbar() {
 						title="View Cart"
 					>
 						Cart
-						<IoIosCart className="text-2xl relative"/>
+						<IoIosCart className="text-2xl relative" />
 						<span className="absolute top-3 right-3 bg-red-600 text-white rounded-full px-2 text-xs">
-							{cart.reduce((sum, item) => sum + item.quantity, 0)}
+							{state?.cart.reduce((sum, item) => sum + item.quantity, 0)}
 						</span>
 					</button>
 				</div>
 			</nav>
 
 			<CartSidebar
-				cart={cart}
 				cartOpen={cartOpen}
 				total={total}
-				setCart={setCart}
 				setCartOpen={setCartOpen}
-				handleQuantity={handleQuantity}
 			/>
 
 			{/* Overlay */}

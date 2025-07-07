@@ -14,7 +14,6 @@ const products: TProduct[] = [
 		rating: { rate: 4.5, count: 120 },
 		stock: 12,
 		inCart: false,
-		quantity: 0,
 	},
 	{
 		id: 2,
@@ -29,7 +28,6 @@ const products: TProduct[] = [
 		rating: { rate: 4.2, count: 80 },
 		stock: 8,
 		inCart: false,
-		quantity: 0,
 	},
 	{
 		id: 3,
@@ -44,7 +42,6 @@ const products: TProduct[] = [
 		rating: { rate: 4.7, count: 200 },
 		stock: 20,
 		inCart: false,
-		quantity: 0,
 	},
 	{
 		id: 4,
@@ -59,7 +56,6 @@ const products: TProduct[] = [
 		rating: { rate: 4.8, count: 60 },
 		stock: 5,
 		inCart: false,
-		quantity: 0,
 	},
 	{
 		id: 5,
@@ -74,7 +70,6 @@ const products: TProduct[] = [
 		rating: { rate: 4.3, count: 150 },
 		stock: 30,
 		inCart: false,
-		quantity: 0,
 	},
 	{
 		id: 6,
@@ -89,7 +84,6 @@ const products: TProduct[] = [
 		rating: { rate: 4.6, count: 110 },
 		stock: 15,
 		inCart: false,
-		quantity: 0,
 	},
 ];
 export const initialState: TInitialState = {
@@ -116,7 +110,6 @@ export const cartReducer = (
 					return {
 						...product,
 						inCart: true,
-						quantity: 1,
 						stock: product.stock - 1,
 					};
 				} else {
@@ -129,6 +122,7 @@ export const cartReducer = (
 				title: productToAdd.title,
 				price: productToAdd.price,
 				quantity: 1,
+				stock: productToAdd.stock - 1,
 			};
 
 			return {
@@ -145,6 +139,7 @@ export const cartReducer = (
 					return {
 						...cI,
 						quantity: cI.quantity + 1,
+						stock: cI.stock - 1,
 					};
 				} else {
 					return cI;
@@ -176,6 +171,7 @@ export const cartReducer = (
 					return {
 						...cI,
 						quantity: cI.quantity - 1,
+						stock: cI.stock + 1,
 					};
 				} else {
 					return cI;
@@ -201,9 +197,22 @@ export const cartReducer = (
 		}
 
 		case "GO_TO_CHECKOUT": {
+			const cartItems = action.payload;
+			if (cartItems.length === 0) {
+				return state;
+			}
+
+			const updatedProducts = state.products.map((product) => {
+				return {
+					...product,
+					inCart: false,
+				};
+			});
+
 			return {
 				...state,
 				cart: [],
+				products: updatedProducts,
 			};
 		}
 

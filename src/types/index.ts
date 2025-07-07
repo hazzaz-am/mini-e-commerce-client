@@ -12,7 +12,6 @@ export type TProduct = {
 	};
 	stock: number;
 	inCart: boolean;
-	quantity: number;
 };
 
 export type TProductCard = Omit<
@@ -23,7 +22,6 @@ export type TProductCard = Omit<
 	| "stock"
 	| "brand"
 	| "inCart"
-	| "quantity"
 >;
 
 export type TCartItem = {
@@ -31,6 +29,7 @@ export type TCartItem = {
 	title: string;
 	price: number;
 	quantity: number;
+	stock: number; 
 };
 
 export type TCheckoutForm = {
@@ -49,4 +48,4 @@ export type TAction =
 	| { type: "ADD_TO_CART"; payload: TProduct }
 	| { type: "INCREASE_QUANTITY"; payload: TCartItem }
 	| { type: "DECREASE_QUANTITY"; payload: TCartItem }
-	| { type: "GO_TO_CHECKOUT"; };
+	| { type: "GO_TO_CHECKOUT"; payload: TCartItem[] };

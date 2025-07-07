@@ -1,12 +1,24 @@
+import toast from "react-hot-toast";
 import { Link } from "react-router";
-import type { TProductCard } from "../../../types";
+import useCart from "../../../hooks/useCart";
+import type { TProduct } from "../../../types";
 import Button from "../../ui/Button";
 
-type ProductItemProps = {
-	product: TProductCard;
+type TProductItemProps = {
+	product: TProduct;
 };
 
-export default function ProductItem({ product }: ProductItemProps) {
+export default function ProductItem({ product }: TProductItemProps) {
+	const cartContext = useCart();
+
+	const handleAddToCart = (data: TProduct) => {
+		cartContext?.dispatch({
+			type: "ADD_TO_CART",
+			payload: data,
+		});
+		toast.success("Product added to cart");
+	};
+
 	return (
 		<div className="w-[200px] bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow flex flex-col border border-gray-100">
 			<Link
@@ -30,8 +42,19 @@ export default function ProductItem({ product }: ProductItemProps) {
 				</div>
 			</Link>
 			<div className="px-4 pb-4">
-				<Button onHandleClick={() => alert("Added to cart!")}>
-					Add to Cart
+				<Button
+					onHandleClick={() => handleAddToCart(product)}
+					disabled={product.stock === 0 || product.inCart}
+					className="disabled:cursor-not-allowed disabled:bg-gray-400"
+					title={
+						product.stock === 0
+							? "Out of Stock"
+							: product.inCart
+							? "Already in Cart"
+							: "Add to Cart"
+					}
+				>
+					{product.inCart ? "In Cart" : "Add to Cart"}
 				</Button>
 			</div>
 		</div>

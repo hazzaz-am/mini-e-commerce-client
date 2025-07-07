@@ -1,13 +1,14 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import toast from "react-hot-toast";
-import type { TCheckoutForm } from "../../../types";
+import useCart from "../../../hooks/useCart";
+import type { TCartItem, TCheckoutForm } from "../../../types";
 import Button from "../../ui/Button";
 import Input from "../../ui/Input";
 import Label from "../../ui/Label";
 import Textarea from "../../ui/Textarea";
 
 type TCheckoutFormProps = {
-	onSubmit: (data: TCheckoutForm) => void;
+	onSubmit: (data: TCheckoutForm, cartItems: TCartItem[]) => void;
 	onClose: () => void;
 };
 
@@ -22,6 +23,8 @@ export default function CheckoutForm({
 	onClose,
 }: TCheckoutFormProps) {
 	const [form, setForm] = useState(initialFormState);
+	const cartState = useCart();
+	const state = cartState?.state;
 
 	const handleChange = (
 		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -47,7 +50,7 @@ export default function CheckoutForm({
 			toast.error("Address is required.");
 			return;
 		}
-		onSubmit(form);
+		onSubmit(form, state?.cart || []);
 		onClose();
 		setForm(initialFormState);
 	};
