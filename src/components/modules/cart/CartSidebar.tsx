@@ -61,7 +61,7 @@ export default function CartSidebar({
 					{state?.cart.length === 0 ? (
 						<p className="text-center text-gray-400">Your cart is empty.</p>
 					) : (
-						state?.cart.map((item) => <CartItem key={item.id} item={item} />)
+						state?.cart.map((item) => <CartItem key={item._id} item={item} />)
 					)}
 				</div>
 
