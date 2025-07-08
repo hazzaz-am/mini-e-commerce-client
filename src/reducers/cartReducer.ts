@@ -1,6 +1,5 @@
 import type { TAction, TInitialState } from "../types";
 
-
 export const initialState: TInitialState = {
 	cart: [],
 	products: [],
@@ -12,9 +11,14 @@ export const cartReducer = (
 ): TInitialState => {
 	switch (action.type) {
 		case "SET_PRODUCTS": {
+			const resetProducts = action.payload.map((product) => ({
+				...product,
+				inCart: false,
+			}));
+
 			return {
 				...state,
-				products: action.payload,
+				products: resetProducts,
 			};
 		}
 
