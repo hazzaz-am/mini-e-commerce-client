@@ -22,7 +22,7 @@ export default function ProductItem({ product }: TProductItemProps) {
 	return (
 		<div className="w-[200px] bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow flex flex-col border border-gray-100">
 			<Link
-				to={`/products/${product.id}`}
+				to={`/products/${product._id}`}
 				className="flex-1 flex flex-col group"
 			>
 				<div className="w-full h-40 bg-gray-100 flex items-center justify-center rounded-t-xl overflow-hidden">

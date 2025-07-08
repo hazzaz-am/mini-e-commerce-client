@@ -1,5 +1,5 @@
 export type TProduct = {
-	id: number;
+	_id: string;
 	title: string;
 	price: number;
 	image: string;
@@ -11,7 +11,7 @@ export type TProduct = {
 		count: number;
 	};
 	stock: number;
-	inCart: boolean;
+	inCart?: boolean;
 };
 
 export type TProductCard = Omit<
@@ -25,7 +25,7 @@ export type TProductCard = Omit<
 >;
 
 export type TCartItem = {
-	id: number;
+	_id: string;
 	title: string;
 	price: number;
 	quantity: number;

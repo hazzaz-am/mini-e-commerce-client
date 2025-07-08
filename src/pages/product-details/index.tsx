@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useParams } from "react-router";
 import Button from "../../components/ui/Button";
@@ -6,10 +7,21 @@ import type { TProduct } from "../../types";
 
 export default function ProductDetails() {
 	const { id } = useParams();
+	const [product, setProduct] = useState<TProduct | null>(null);
 	const cartContext = useCart();
-	const state = cartContext?.state;
 
-	const product = state?.products?.find((p: TProduct) => p.id === Number(id));
+	useEffect(() => {
+		const foundProduct = async () => {
+			const res = await fetch(`http://localhost:8000/products/${id}`);
+			if (!res.ok) {
+				setProduct(null);
+				return;
+			}
+			const data = await res.json();
+			setProduct(data);
+		};
+		foundProduct();
+	}, [id]);
 
 	if (!product) {
 		return (

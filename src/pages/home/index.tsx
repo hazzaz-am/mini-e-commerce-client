@@ -10,7 +10,7 @@ export default function HomePage() {
 			<h1 className="text-2xl font-bold mb-8 text-center">Products</h1>
 			<div className="flex flex-wrap justify-center gap-8">
 				{state?.products.map((product: TProduct) => (
-					<ProductItem key={product.id} product={product} />
+					<ProductItem key={product._id} product={product} />
 				))}
 			</div>
 		</div>
