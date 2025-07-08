@@ -12,7 +12,7 @@ export default function ProductDetails() {
 
 	useEffect(() => {
 		const foundProduct = async () => {
-			const res = await fetch(`http://localhost:8000/products/${id}`);
+			const res = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/products/${id}`);
 			if (!res.ok) {
 				setProduct(null);
 				return;

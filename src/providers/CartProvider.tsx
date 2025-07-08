@@ -11,7 +11,7 @@ export default function CartProvider({
 
 	useEffect(() => {
 		const fetchProducts = async () => {
-			const res = await fetch("http://localhost:8000/products");
+			const res = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/products`);
 			const data = await res.json();
 			dispatch({ type: "SET_PRODUCTS", payload: data });
 		};
